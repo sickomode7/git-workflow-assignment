@@ -1,0 +1,121 @@
+Git Commands Used in the Assignment
+Student: Tanishka Mangure (2024EB02339)
+Repository: git-workflow-assignment
+Every command below was executed in the project folder in the order shown.
+
+1. SETUP AND CONFIGURATION
+--------------------------------------------------------------------------------
+git --version
+    Prints the installed Git version; confirms Git is available before starting.
+
+git init
+    Creates a new, empty Git repository (a hidden .git folder) inside the project
+    folder. No GitHub repository exists at this point.
+
+git branch -M main
+    Renames the current branch to main, so the default branch has the modern name.
+
+git config user.name "Tanishka Mangure"
+    Sets the author name that is written into every commit (set once per machine).
+
+git config user.email "tanishkamangure2005@gmail.com"
+    Sets the author email attached to every commit (set once per machine).
+
+2. STAGING AND COMMITTING
+--------------------------------------------------------------------------------
+git status
+    Shows the working tree state: untracked, modified and staged files, and the
+    current branch. Used before and after every change.
+
+git add index.html about.html
+    Moves the named files from the working directory into the staging area, so the
+    next commit will include them.
+
+git add .gitignore
+    Stages the new .gitignore file so it can be committed.
+
+git add about.html
+    Stages the modified about.html after the footer was added.
+
+git commit -m "Initial commit: add index.html and about.html"
+    Records the staged files as the first commit (-m supplies the message inline).
+
+git commit -m "Update index.html: add version 2 paragraph"
+    Creates the second commit containing the modified home page.
+
+git commit -m "Add Team section to about.html"
+    Commits the branch-specific change on the feature branch.
+
+git commit -m "Add footer to about.html (re-committed after soft reset)"
+    Re-creates the content as a clean commit after the undo demonstration.
+
+3. INSPECTING HISTORY AND CHANGES
+--------------------------------------------------------------------------------
+git log --oneline
+    Lists commits one line each (short hash + message), newest first.
+
+git log --oneline --decorate
+    Same list with branch and tag pointers (HEAD -> main, feature) added.
+
+git log --oneline --graph --decorate --all
+    Draws the branch/merge graph for all branches, proving that feature was
+    created, committed to and merged.
+
+git diff
+    Shows unstaged changes line by line, before they are added to the index.
+
+git diff --cached
+    Shows what is staged and would go into the next commit.
+
+git show --stat --oneline HEAD
+    Displays the last commit with a summary of the files it changed.
+
+4. BRANCHING AND MERGING
+--------------------------------------------------------------------------------
+git branch
+    Lists local branches; the asterisk marks the current one.
+
+git switch -c feature
+    Creates the branch feature and switches to it in one step (-c = create).
+
+git switch main
+    Switches back to the main branch.
+
+git merge --no-ff feature -m "Merge branch 'feature' into main"
+    Merges feature into main. --no-ff forces a merge commit, so the branch
+    activity stays visible in the history instead of a fast-forward.
+
+5. IGNORING FILES
+--------------------------------------------------------------------------------
+git status --ignored
+    Lists files that Git is ignoring, used to prove *.log and temp/ are excluded.
+
+6. UNDOING A COMMIT
+--------------------------------------------------------------------------------
+git reset --soft HEAD~1
+    Undoes the last commit only: HEAD moves back one commit, the index and working
+    files are untouched, so the change reappears as staged. The safest undo when
+    the work should be kept.
+
+7. GITHUB INTEGRATION
+--------------------------------------------------------------------------------
+git remote add origin https://github.com/sickomode7/git-workflow-assignment.git
+    Connects the local repository to the empty public GitHub repository and names
+    the remote origin.
+
+git push -u origin main
+    Uploads the main branch and its full history to GitHub; -u sets origin/main as
+    the upstream branch, so later pushes only need "git push".
+
+git push -u origin feature
+    Uploads the feature branch as well, so the branch is visible on GitHub.
+
+git remote -v
+    Lists the configured remotes with their fetch and push URLs for verification.
+
+git ls-remote origin
+    Queries GitHub directly and lists the refs stored there; proves that main and
+    feature really exist on the remote.
+
+git log --oneline --graph
+    Final local history check after pushing.
